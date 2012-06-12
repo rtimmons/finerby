@@ -89,12 +89,17 @@ end
 
 if $0 == __FILE__ then
   t = Tabular.new
-  for r in [1,2,5,7] do
-    t << s = Scenario.new(:principle       => 100_000,
-                          :years           => 40,
-                          :rate            => 1.to_f + (r.to_f/100.to_f),
-                          :annual_addition => 0).to_h
+  for yrs in [20, 25, 30, 35, 40] do
+    for add in [50*12, 100*12, 500*12] do
+      for r in [1,2,5,7] do
+        t << s = Scenario.new(:principle       => 100_000,
+                              :years           => yrs,
+                              :rate            => 1.to_f + (r.to_f/100.to_f),
+                              :annual_addition => add).to_h
+      end
+    end
   end
+
   puts t.to_s
   # puts "%.2f " % [s.end_value]
 end
