@@ -29,13 +29,13 @@ class Tabular
     out = []
     maxes = self.maxes()
     
-    rows.first.keys.sort.each do |key|
+    rows.first.keys.each do |key|
       out << key.to_s.ljust(maxes[key] + 2)
     end
     out << "\n"
     
     rows.each do |row|
-      ks = row.keys.sort
+      ks = row.keys
       ks.each do |key|
         v = row[key]
         if v.is_a? Float then
@@ -92,7 +92,7 @@ if $0 == __FILE__ then
   for yrs in [20, 25, 30, 35, 40] do
     for add in [50*12, 100*12, 500*12] do
       for r in [1,2,5,7] do
-        t << s = Scenario.new(:principle       => 100_000,
+        t << s = Scenario.new(:principle       => 120_000,
                               :years           => yrs,
                               :rate            => 1.to_f + (r.to_f/100.to_f),
                               :annual_addition => add).to_h
